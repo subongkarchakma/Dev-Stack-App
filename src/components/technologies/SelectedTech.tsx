@@ -7,6 +7,6 @@ export interface SelectedTechProps {
 }
 
 export default function SelectedTech({ selectedTech, setSelectedTech }: SelectedTechProps) {
-    console.log(selectedTech, 'hello protiva');
+    console.log(selectedTech, 'hello pro max');
   return;
 }

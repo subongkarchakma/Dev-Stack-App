@@ -1,6 +1,7 @@
 import { use, useState } from 'react';
 import type { ITech } from '../../types/techType';
 import TechCard from './TechCard';
+import { MdCancel } from 'react-icons/md';
 
 export interface TechProps {
   techPromise: Promise<ITech[]>;
@@ -10,6 +11,10 @@ export default function Tech({ techPromise }: TechProps) {
   const technologies = use(techPromise);
   // console.log(tech);
   const [selectedTech, setSelectedTech] = useState<ITech[]>([]);
+  const handleTechUpdate = (technology: ITech): void => {
+    let newSelectedTech = [...selectedTech, technology];
+    setSelectedTech(newSelectedTech);
+  };
   return (
     <div className="container mx-auto  ">
       <h2 className="text-4xl font-bold">
@@ -18,12 +23,50 @@ export default function Tech({ techPromise }: TechProps) {
           Technologies
         </span>{' '}
       </h2>
-      <p className='text-[#64748B] '>Pick one technology per catagory to build your ideal stack</p>
-
-      <div className="container mx-auto grid grid-cols-3 gap-6 mt-8 ">
-        {technologies.map((technology) => {
-          return <TechCard key={technology.id} technology={technology} selectedTech ={selectedTech} setSelectedTech = {setSelectedTech} />;
-        })}
+      <p className="text-[#64748B] ">
+        Pick one technology per catagory to build your ideal stack
+      </p>
+      {/* Explore the Technology */}
+      <div className="container mx-auto grid grid-cols-10 gap-6 justify-center my-8">
+        {/* Technology Cards */}
+        <div className="container mx-auto col-span-7 grid grid-cols-3 gap-6  ">
+          {technologies.map((technology) => {
+            return (
+              <TechCard
+                handleTechUpdate={handleTechUpdate}
+                key={technology.id}
+                technology={technology}
+                selectedTech={selectedTech}
+                setSelectedTech={setSelectedTech}
+              />
+            );
+          })}
+        </div>
+        {/* selectedStack Sidebar */}
+        <div className="col-span-3 h-fit border border-gray-300 rounded-xl p-4 sticky top-13 self-start">
+          <h2 className='text-2xl font-bold mb-2'>Your Stack</h2>
+          <p className='mb-4'> {selectedTech.length} Technology Selected </p>
+          <div>
+            {selectedTech.map((technology) => (
+              <div className="flex items-center justify-between border border-gray-200 rounded-lg p-2">
+                <div className="flex items-center gap-4">
+                  <svg viewBox="0 0 100 100" className="w-8 h-8">
+                    <image href={technology.icon} width="100" height="100" />
+                  </svg>
+                  <div className="flex flex-col">
+                    <h2> {technology.name}</h2>
+                    <h2>{technology.category}</h2>
+                  </div>
+                </div>
+                <div>
+                  <button className='text-2xl'>
+                    <MdCancel />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
