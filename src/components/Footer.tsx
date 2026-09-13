@@ -4,7 +4,7 @@ const Footer = () => {
     return (
         <div>
 
-  <div className="max-w-7xl mx-auto my-22 px-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-16">
+  <div className="max-w-[500px] mx-auto my-22 px-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-16">
     
     {/* About */}
     <div className="sm:col-span-2 lg:col-span-1">
