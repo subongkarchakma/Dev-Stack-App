@@ -4,8 +4,9 @@ import Nav from "./components/Nav"
 import Tech from "./components/technologies/Tech";
 import type { ITech } from "./types/techType";
 import Footer from "./components/Footer";
-const techFetch = async(): Promise<ITech> =>{
-  const res = await fetch('/public/technologies.json');
+
+const techFetch = async(): Promise<ITech[]> =>{
+  const res = await fetch('/technologies.json');
   const data = await res.json();
   return data
 }
