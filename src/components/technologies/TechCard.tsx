@@ -1,20 +1,15 @@
-import { useState, type Dispatch, type SetStateAction } from 'react';
+import { useState } from 'react';
 import type { ITech } from '../../types/techType';
 import { CiStar } from 'react-icons/ci';
-import SelectedTech from './SelectedTech';
 
 export interface TechCardProps {
   technology: ITech;
   handleTechUpdate:(technology: ITech) => void;
-  selectedTech: ITech[];
-  setSelectedTech: Dispatch<SetStateAction<ITech[]>>;
 }
 
 export default function TechCard({
   technology,
-  handleTechUpdate,
-  selectedTech,
-  setSelectedTech,
+  handleTechUpdate
 }: TechCardProps) {
   const [isAdded, setIsAdded] = useState(false);
   const handleIsAdded = ()=>{
@@ -67,16 +62,12 @@ export default function TechCard({
 
         {/* Button */}
         <button
-          onClick={handleIsAdded}
+          onClick={()=> handleIsAdded()}
           className={`btn btn-neutral mt-6 w-full rounded-xl font-normal transition-transform duration-300 hover:scale-[1.02]`}
           disabled={isAdded}
-        >
+               >
           {isAdded ? 'Added' : 'Add to Stack'}
         </button>
-        <SelectedTech
-          selectedTech={selectedTech}
-          setSelectedTech={setSelectedTech}
-        />
       </div>
   );
 }

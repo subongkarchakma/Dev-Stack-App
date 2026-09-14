@@ -2,6 +2,7 @@ import { use, useState } from 'react';
 import type { ITech } from '../../types/techType';
 import TechCard from './TechCard';
 import { MdCancel } from 'react-icons/md';
+// import { MdCancel } from 'react-icons/md';
 
 export interface TechProps {
   techPromise: Promise<ITech[]>;
@@ -13,8 +14,14 @@ export default function Tech({ techPromise }: TechProps) {
   const [selectedTech, setSelectedTech] = useState<ITech[]>([]);
   const handleTechUpdate = (technology: ITech): void => {
     let newSelectedTech = [...selectedTech, technology];
+    if(selectedTech.includes(technology)){
+        newSelectedTech = selectedTech.filter(p => p.id != technology.id )
+    }else{
+        setSelectedTech((p)=> [...p, technology] )
+    }
     setSelectedTech(newSelectedTech);
   };
+
   return (
     <div className="container mx-auto  ">
       <h2 className="text-4xl font-bold">
@@ -36,16 +43,16 @@ export default function Tech({ techPromise }: TechProps) {
                 handleTechUpdate={handleTechUpdate}
                 key={technology.id}
                 technology={technology}
-                selectedTech={selectedTech}
-                setSelectedTech={setSelectedTech}
+                // selectedTech={selectedTech}
+                // setSelectedTech={setSelectedTech}
               />
             );
           })}
         </div>
         {/* selectedStack Sidebar */}
         <div className="col-span-3 h-fit border border-gray-300 rounded-xl p-4 sticky top-13 self-start">
-          <h2 className='text-2xl font-bold mb-2'>Your Stack</h2>
-          <p className='mb-4'> {selectedTech.length} Technology Selected </p>
+          <h2 className="text-2xl font-bold mb-2">Your Stack</h2>
+          <p className="mb-4"> {selectedTech.length} Technology Selected </p>
           <div>
             {selectedTech.map((technology) => (
               <div className="flex items-center justify-between border border-gray-200 rounded-lg p-2">
@@ -59,7 +66,10 @@ export default function Tech({ techPromise }: TechProps) {
                   </div>
                 </div>
                 <div>
-                  <button className='text-2xl'>
+                  <button
+                    onClick={() => handleTechUpdate(technology)}
+                    className="text-2xl"
+                  >
                     <MdCancel />
                   </button>
                 </div>
