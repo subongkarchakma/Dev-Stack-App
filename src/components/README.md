@@ -1,13 +1,12 @@
 
+Name of project : Dev-Stack-app
 
-Name of  project = Dev-Stack-app
-
-A little description = Assignment-5-DevStack-app is a simple project. Its solve the problem of add to stack, also remove/delete to unnessary stack when we dont need, just like e commerce website add to cart
+A little description : Assignment-5-DevStack-app is a simple project. Its solve the problem of add to stack, also remove/delete to unnessary stack when we dont need, just like e commerce website add to cart
 
 
-Technology that you use = This project is created using DaisyUI tailwin css,JavaScript (ES6+), react, React-Toastify (NPM Package), JSON (for technology data),Vite (build tool).
+Technology that you use : This project is created using DaisyUI tailwind css, typescript, JavaScript (ES6+), react, React-Toastify (NPM Package), JSON (for technology data),Vite (build tool).
 
-3 features about your project = 1. data add, 2.data fetch , 3. button cart remove
+3 features about your project = 1. data add, 2.data fetch , 3. Add and remove Stack Functionality
 
 
 1. What is JSX, and why is it used in React? 

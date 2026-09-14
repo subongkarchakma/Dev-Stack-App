@@ -2,6 +2,7 @@ import { use, useState } from 'react';
 import type { ITech } from '../../types/techType';
 import TechCard from './TechCard';
 import { MdCancel } from 'react-icons/md';
+import { toast } from 'react-toastify';
 // import { MdCancel } from 'react-icons/md';
 
 export interface TechProps {
@@ -16,11 +17,17 @@ export default function Tech({ techPromise }: TechProps) {
     let newSelectedTech = [...selectedTech, technology];
     if(selectedTech.includes(technology)){
         newSelectedTech = selectedTech.filter(p => p.id != technology.id )
+        toast.warn(`${technology.name} remove from your stack`)
     }else{
         setSelectedTech((p)=> [...p, technology] )
+        toast.success(`${technology.name} Added to your stack`)
     }
     setSelectedTech(newSelectedTech);
   };
+  const handleDeleteAll = (): void =>{
+    setSelectedTech([]);
+    toast("All Technologies removed")
+  }
 
   return (
     <div className="container mx-auto  ">
@@ -42,9 +49,7 @@ export default function Tech({ techPromise }: TechProps) {
               <TechCard
                 handleTechUpdate={handleTechUpdate}
                 key={technology.id}
-                technology={technology}
-                // selectedTech={selectedTech}
-                // setSelectedTech={setSelectedTech}
+                technology={technology}              
               />
             );
           })}
@@ -76,6 +81,12 @@ export default function Tech({ techPromise }: TechProps) {
               </div>
             ))}
           </div>
+
+            {selectedTech.length > 0 && (
+                <button className='mt-12 w-full rounded-lg py-2 font-bold text-red-600 border border-red-400' onClick={handleDeleteAll}>
+                    Remove All</button>
+            ) }
+
         </div>
       </div>
     </div>
